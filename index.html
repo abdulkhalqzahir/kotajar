@@ -1,165 +1,1346 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فۆڕمی لۆگین</title>
+    <title>سیستەمی دەرمانخانە</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ڕێسای سەرەکی */
+        :root {
+            --primary: #6a1b9a;
+            --primary-dark: #4a148c;
+            --primary-light: #9c4dcc;
+            --secondary: #212121;
+            --secondary-light: #424242;
+            --secondary-dark: #000000;
+            --text-light: #f5f5f5;
+            --text-dark: #212121;
+            --success: #2e7d32;
+            --warning: #ff8f00;
+            --error: #c62828;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', Arial, sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-         
+            background-color: #f5f5f5;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* سەرپەڕ */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--text-light);
+            padding: 20px 0;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        header h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* پەنجەرەی گواستنەوە */
+        nav {
+            margin-top: 15px;
+        }
+
+        nav ul {
             display: flex;
             justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: var(--radius);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-shadow: 0px 0px 10px 0px red;    
-            margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        animation: gradientBG 15s ease infinite; /* ئەنیمەیشن */
-        text-align: right;
-        
-        }
-html,body{
-    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
-}
-input{
-    color: aliceblue;
-}
-      .login-container {
-            background-color: rgba(0,0,0,0.5) !important;
-
-            padding: 20px 40px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 20px 0px red;
-           
-            width: 300px;
-            text-align: center;
+            gap: 8px;
         }
 
-        .login-container h2 {
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a i {
+            font-size: 1rem;
+        }
+
+        /* بەشەکان */
+        .section {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--radius);
             margin-bottom: 20px;
-            color: #bcbbac;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
         }
 
-        :hover.login-container input[type="text"],
-        :hover.login-container input[type="password"] {
-            box-shadow: 0px 0px 40px 0px yellow;
-        transition: 0.9s;}
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+            font-size: 1.4rem;
+        }
+
+        /* کارتی ئامار */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--text-light);
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .stat-card p {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* دوگمەکان */
+        button, .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        button:hover, .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        button:active, .btn:active {
+            transform: translateY(0);
+        }
+
+        button i, .btn i {
+            font-size: 0.9rem;
+        }
+
+        .btn-sm {
+            padding: 6px 10px;
+            font-size: 0.8rem;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* خشتە */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* تەیبڵی زیادکردن */
+        .add-medicine-table {
+            margin-bottom: 20px;
+        }
+
+        .add-medicine-table td {
+            padding: 10px;
+        }
+
+        .add-medicine-table input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+        }
+
+        /* ئاگاداری */
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: var(--radius);
+            color: white;
+            box-shadow: var(--shadow);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert-success {
+            background-color: var(--success);
+        }
+
+        .alert-error {
+            background-color: var(--error);
+        }
+
+        .alert-warning {
+            background-color: var(--warning);
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* مەوادەی بەسەرچوو */
+        .expired-medicines {
+            background-color: #ffebee;
+            border-left: 4px solid var(--error);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        /* سیستەمی فرۆشتن */
+        .barcode-scanner {
+            margin-top: 15px;
+            position: relative;
+        }
+
+        #barcode-input {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #6a1b9a;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: var(--radius);
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        #barcode-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(106, 27, 154, 0.3);
+        }
+
+        #start-scan {
+            background-color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        #start-scan:hover {
+            background-color: var(--secondary-light);
+        }
+
+        .sales-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        .sale-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .cart {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #000000;
-            border-radius: 4px;
-            font-size: 16px;
-            text-align: right;
-           
-            background-color: rgba(0,0,0,0.5) !important;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
         }
 
-        .login-container input[type="submit"] {
-            width: 321px;
-            padding: 10px;
-            background-color: rgba(0,0,0,0.5) !important;
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid var(--primary-light);
+            text-align: left;
+        }
+
+        .cart-total h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        #complete-sale {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        /* وەشانەکانی مۆبایل */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
             
-        }
-        :hover.login-container input[type="submit"]{
-box-shadow: 0px 0px 20px 0px red;
-transition: 0.5s;
-        }
-        .login-container input[type="submit"]:hover {
-            background-color: #218838;
+            nav ul li a {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
             
-        }
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .stat-card p {
+                font-size: 1.5rem;
+            }
+            
+            th, td {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
 
-        .login-container .error-message {
-            color: red;
-            margin-top: 10px;
+            .sales-container {
+                grid-template-columns: 1fr;
+            }
         }
-        img{
-          border-radius: 400px;
-        }
-        .password-container {
-    position: relative;
-    width: 100%;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 18px;
-    color: #333;
-}
-
-.toggle-password:hover {
-    color: #007bff;
-}
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-prescription-bottle-alt"></i> سیستەمی دەرمانخانە</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" data-section="dashboard"><i class="fas fa-home"></i> سەرەکی</a></li>
+                    <li><a href="#" data-section="inventory"><i class="fas fa-boxes"></i> کۆگا</a></li>
+                    <li><a href="#" data-section="sales"><i class="fas fa-cash-register"></i> فرۆشتن</a></li>
+                    <li><a href="#" data-section="reports"><i class="fas fa-chart-bar"></i> ڕاپۆرت</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <div class="login-container">
-        <img src="sa.jpg" alt="">
-        <h2>کۆلێژی کارگێری و ئابووری</h2>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="ناوی بەکارهێنەر" required>
-            <div class="password-container">
-                <input type="password" id="password" placeholder="پاسوۆرد" required>
-                <span class="toggle-password" onclick="togglePasswordVisibility()"></span>
-            </div>
-            <br>
-            <input type="submit" value="چوونەژوورەوە">
-        </form>
-        
-        <p class="error-message" id="errorMessage"></p>
+        <main>
+            <!-- سەرەکی -->
+            <section id="dashboard" class="section active">
+                <h2><i class="fas fa-tachometer-alt"></i> داشبۆرد</h2>
+                <div class="expired-medicines" id="expired-medicines"></div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3><i class="fas fa-pills"></i> کۆی دەرمانەکان</h3>
+                        <p id="total-medicines">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> دەرمانی کەم</h3>
+                        <p id="low-stock">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3><i class="fas fa-shopping-cart"></i> فرۆشتی ئەمڕۆ</h3>
+                        <p id="today-sales">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- کۆگا -->
+            <section id="inventory" class="section">
+                <h2><i class="fas fa-boxes"></i> بەڕێوەبردنی کۆگا</h2>
+                
+                <!-- تەیبڵی زیادکردنی دەرمانی نوێ -->
+                <div class="table-responsive add-medicine-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ناوی دەرمان</th>
+                                <th>کۆد</th>
+                                <th>بارکۆد</th>
+                                <th>نرخ</th>
+                                <th>ژمارە</th>
+                                <th>بەتاڵی</th>
+                                <th>کردار</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="add-medicine-row">
+                                <td><input type="text" id="medicine-name" placeholder="ناوی دەرمان"></td>
+                                <td><input type="text" id="medicine-code" placeholder="کۆد"></td>
+                                <td><input type="text" id="medicine-barcode" placeholder="بارکۆد"></td>
+                                <td><input type="number" id="medicine-price" placeholder="نرخ" min="1"></td>
+                                <td><input type="number" id="medicine-quantity" placeholder="ژمارە" min="1"></td>
+                                <td><input type="date" id="medicine-expiry"></td>
+                                <td><button id="add-medicine-btn"><i class="fas fa-plus"></i> زیادکردن</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- گەڕان -->
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="search-medicine" placeholder="گەڕان بە ناو یان کۆد..." style="width: 100%; padding: 10px;">
+                </div>
+                
+                <!-- لیستی دەرمانەکان -->
+                <div class="table-responsive">
+                    <table id="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>کۆد</th>
+                                <th>ناو</th>
+                                <th>نرخ</th>
+                                <th>ژمارە</th>
+                                <th>بەتاڵی</th>
+                                <th>بارکۆد</th>
+                                <th>کردار</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-list">
+                            <!-- دەرمانەکان لێرە دەخرێنەوە -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- فرۆشتن -->
+            <section id="sales" class="section">
+                <h2><i class="fas fa-cash-register"></i> سیستەمی فرۆشتن</h2>
+                <div class="sales-container">
+                    <div class="sale-form">
+                        <div class="barcode-section">
+                            <button id="start-scan" class="btn"><i class="fas fa-barcode"></i> سکانکردنی بارکۆد</button>
+                            <div class="barcode-scanner">
+                                <input type="text" id="barcode-input" placeholder="بارکۆد بنووسە یان سکان بکە...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sale-medicine"><i class="fas fa-pills"></i> دەرمان</label>
+                            <select id="sale-medicine">
+                                <!-- دەرمانەکان لێرە دەخرێنەوە -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sale-quantity"><i class="fas fa-cubes"></i> ژمارە</label>
+                            <input type="number" id="sale-quantity" min="1" value="1">
+                        </div>
+                        <button id="add-to-cart" class="btn"><i class="fas fa-cart-plus"></i> زیادکردن بۆ سەبەتە</button>
+                    </div>
+
+                    <div class="cart">
+                        <h3><i class="fas fa-shopping-cart"></i> سەبەتە</h3>
+                        <div class="table-responsive">
+                            <table id="cart-table">
+                                <thead>
+                                    <tr>
+                                        <th>ناو</th>
+                                        <th>ژمارە</th>
+                                        <th>نرخ</th>
+                                        <th>کۆی گشتی</th>
+                                        <th>کردار</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cart-items">
+                                    <!-- کاڵاکانی سەبەتە لێرە دەخرێنەوە -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cart-total">
+                            <h4>کۆی گشتی: <span id="total-amount">0</span> دینار</h4>
+                            <button id="complete-sale" class="btn"><i class="fas fa-check-circle"></i> تەواوکردنی فرۆشتن</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="receipt-section" style="display: none;">
+                    <h3><i class="fas fa-receipt"></i> وەصل</h3>
+                    <div id="receipt"></div>
+                    <button id="print-receipt" class="btn-outline"><i class="fas fa-print"></i> پرینتکردنی وەصل</button>
+                </div>
+            </section>
+
+            <!-- ڕاپۆرت -->
+            <section id="reports" class="section">
+                <h2><i class="fas fa-chart-bar"></i> ڕاپۆرتەکان</h2>
+                <div class="report-filters">
+                    <div class="form-group">
+                        <label for="report-type"><i class="fas fa-chart-pie"></i> جۆری ڕاپۆرت</label>
+                        <select id="report-type">
+                            <option value="inventory">ڕاپۆرتی کۆگا</option>
+                            <option value="sales">ڕاپۆرتی فرۆشتن</option>
+                            <option value="expiry">دەرمانەکانی بەسەرچوو</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="report-date"><i class="fas fa-calendar-alt"></i> بەروار</label>
+                        <input type="date" id="report-date">
+                    </div>
+                    <button id="generate-report" class="btn"><i class="fas fa-file-alt"></i> دروستکردنی ڕاپۆرت</button>
+                </div>
+
+                <div class="report-results" id="report-results">
+                    <!-- ئەنجامەکانی ڕاپۆرت لێرە دەخرێنەوە -->
+                </div>
+            </section>
+        </main>
+
+        <footer style="text-align: center; margin-top: 30px; padding: 15px; color: var(--secondary-light);">
+            <p>سیستەمی بەڕێوەبردنی دەرمانخانە &copy; <span id="current-year"></span></p>
+        </footer>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            function togglePasswordVisibility() {
-    const passwordInput = document.getElementById('password');
-    const toggleIcon = document.querySelector('.toggle-password');
-
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleIcon.textContent = ''; // یان هێمایەکی تر بۆ نیشاندانی پاسوۆرد
-    } else {
-        passwordInput.type = 'password';
-        toggleIcon.textContent = '';
-    }
-}
-            // نموونەی یوزەر و پاسوۆرد
-            var correctUsername = "idara.com";
-            var correctPassword = "idara1";
-
-            if (username === correctUsername && password === correctPassword) {
-                // ئەگەر یوزەر و پاسوۆرد ڕاست بوو، بچۆ بۆ وێبسایتەکە
-                window.location.href = "sss.html";
-            } else {
-                // ئەگەر یوزەر یان پاسوۆرد هەڵە بوو، هەڵە نیشان بدە
-                document.getElementById('errorMessage').textContent = "ناوی بەکارهێنەر یان پاسوۆرد هەڵەیە!";
-            }
+        // زانیارییەکانی دەرمان و فرۆشتن
+        let medicines = JSON.parse(localStorage.getItem('pharmacy_medicines')) || [];
+        let sales = JSON.parse(localStorage.getItem('pharmacy_sales')) || [];
+        let cart = [];
+        
+        // ساڵی ئێستا
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // فەرمانی سەرەکی
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            setupNavigation();
+            setupMedicineTable();
+            setupSalesSystem();
+            setupBarcodeScanner();
+            checkExpiredMedicines();
         });
+        
+        // بارکردنی داتا
+        function loadData() {
+            updateDashboardStats();
+            updateInventoryTable();
+            updateMedicineDropdown();
+        }
+        
+        // پاشەکەوتکردنی داتا
+        function saveData() {
+            localStorage.setItem('pharmacy_medicines', JSON.stringify(medicines));
+            localStorage.setItem('pharmacy_sales', JSON.stringify(sales));
+        }
+        
+        // ڕێکخستنی پەنجەرەی گواستنەوە
+        function setupNavigation() {
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                    document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                    
+                    if (sectionId === 'inventory') updateInventoryTable();
+                    else if (sectionId === 'sales') {
+                        updateMedicineDropdown();
+                        updateCartTable();
+                    }
+                    else if (sectionId === 'dashboard') updateDashboardStats();
+                    else if (sectionId === 'reports') generateReport();
+                });
+            });
+        }
+        
+        // ڕێکخستنی تەیبڵی زیادکردنی دەرمان
+        function setupMedicineTable() {
+            document.getElementById('add-medicine-btn').addEventListener('click', addNewMedicine);
+            
+            // زیادکردنی دەرمان بە فشاری ئینتەر
+            document.querySelectorAll('#add-medicine-row input').forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') addNewMedicine();
+                });
+            });
+        }
+        
+        // زیادکردنی دەرمانی نوێ
+        function addNewMedicine() {
+            const name = document.getElementById('medicine-name').value.trim();
+            const code = document.getElementById('medicine-code').value.trim();
+            const barcode = document.getElementById('medicine-barcode').value.trim();
+            const price = parseInt(document.getElementById('medicine-price').value);
+            const quantity = parseInt(document.getElementById('medicine-quantity').value);
+            const expiry = document.getElementById('medicine-expiry').value;
+            
+            // پشکنینی خانە پڕەکان
+            if (!name || !code || isNaN(price) || isNaN(quantity) || !expiry) {
+                showAlert('تکایە هەموو خانە پڕەکان پڕبکەرەوە!', 'error');
+                return;
+            }
+            
+            const newMedicine = {
+                id: medicines.length > 0 ? Math.max(...medicines.map(m => m.id)) + 1 : 1,
+                code,
+                name,
+                barcode: barcode || null,
+                price,
+                quantity,
+                expiry
+            };
+            
+            medicines.push(newMedicine);
+            saveData();
+            
+            // پاککردنەوەی خانەکان
+            document.getElementById('medicine-name').value = '';
+            document.getElementById('medicine-code').value = '';
+            document.getElementById('medicine-barcode').value = '';
+            document.getElementById('medicine-price').value = '';
+            document.getElementById('medicine-quantity').value = '';
+            document.getElementById('medicine-expiry').value = '';
+            
+            updateInventoryTable();
+            updateMedicineDropdown();
+            updateDashboardStats();
+            
+            showAlert('دەرمانی نوێ بە سەرکەوتوویی تۆمارکرا!', 'success');
+        }
+        
+        // نوێکردنەوەی خشتەی کۆگا
+        function updateInventoryTable() {
+            const tbody = document.getElementById('inventory-list');
+            tbody.innerHTML = '';
+            
+            medicines.sort((a, b) => new Date(a.expiry) - new Date(b.expiry)).forEach(medicine => {
+                const expiryDate = new Date(medicine.expiry);
+                const today = new Date();
+                const isExpired = expiryDate < today;
+                
+                const row = document.createElement('tr');
+                if (isExpired) row.classList.add('expired-row');
+                
+                row.innerHTML = `
+                    <td>${medicine.code}</td>
+                    <td>${medicine.name}</td>
+                    <td>${medicine.price.toLocaleString()} دینار</td>
+                    <td>${medicine.quantity}</td>
+                    <td class="${isExpired ? 'text-danger' : ''}">${medicine.expiry} ${isExpired ? '(بەسەرچوو)' : ''}</td>
+                    <td>${medicine.barcode || '-'}</td>
+                    <td>
+                        <button class="edit-btn btn-sm" data-id="${medicine.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn btn-sm" data-id="${medicine.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            // زیادکردنی ڕەفتار بۆ دوگمەکان
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', () => editMedicine(parseInt(btn.dataset.id)));
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', () => deleteMedicine(parseInt(btn.dataset.id)));
+            });
+            
+            // گەڕان
+            document.getElementById('search-medicine').addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                const rows = tbody.querySelectorAll('tr');
+                
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(query) ? '' : 'none';
+                });
+            });
+        }
+        
+        // دەستکاری دەرمان
+        function editMedicine(id) {
+            const medicine = medicines.find(m => m.id === id);
+            if (!medicine) return;
+            
+            // زیادکردنی زانیارییەکان بۆ تەیبڵی زیادکردن
+            document.getElementById('medicine-name').value = medicine.name;
+            document.getElementById('medicine-code').value = medicine.code;
+            document.getElementById('medicine-barcode').value = medicine.barcode || '';
+            document.getElementById('medicine-price').value = medicine.price;
+            document.getElementById('medicine-quantity').value = medicine.quantity;
+            document.getElementById('medicine-expiry').value = medicine.expiry;
+            
+            // گۆڕینی دوگمەی زیادکردن بۆ نوێکردنەوە
+            const addBtn = document.getElementById('add-medicine-btn');
+            addBtn.innerHTML = '<i class="fas fa-save"></i> نوێکردنەوە';
+            addBtn.onclick = function() {
+                updateMedicine(id);
+            };
+            
+            // هێنانەوەی دوگمەی زیادکردن
+            function resetAddButton() {
+                addBtn.innerHTML = '<i class="fas fa-plus"></i> زیادکردن';
+                addBtn.onclick = addNewMedicine;
+            }
+            
+            // زیادکردنی دوگمەی پاشگەزبوونەوە
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = 'btn-sm btn-outline';
+            cancelBtn.innerHTML = '<i class="fas fa-times"></i> پاشگەزبوونەوە';
+            cancelBtn.style.marginRight = '5px';
+            cancelBtn.onclick = function() {
+                document.getElementById('medicine-name').value = '';
+                document.getElementById('medicine-code').value = '';
+                document.getElementById('medicine-barcode').value = '';
+                document.getElementById('medicine-price').value = '';
+                document.getElementById('medicine-quantity').value = '';
+                document.getElementById('medicine-expiry').value = '';
+                resetAddButton();
+                this.remove();
+            };
+            
+            addBtn.parentNode.insertBefore(cancelBtn, addBtn);
+        }
+        
+        // نوێکردنەوەی دەرمان
+        function updateMedicine(id) {
+            const medicine = medicines.find(m => m.id == id);
+            
+            if (medicine) {
+                medicine.name = document.getElementById('medicine-name').value.trim();
+                medicine.code = document.getElementById('medicine-code').value.trim();
+                medicine.barcode = document.getElementById('medicine-barcode').value.trim() || null;
+                medicine.price = parseInt(document.getElementById('medicine-price').value);
+                medicine.quantity = parseInt(document.getElementById('medicine-quantity').value);
+                medicine.expiry = document.getElementById('medicine-expiry').value;
+                
+                saveData();
+                
+                // پاککردنەوەی خانەکان
+                document.getElementById('medicine-name').value = '';
+                document.getElementById('medicine-code').value = '';
+                document.getElementById('medicine-barcode').value = '';
+                document.getElementById('medicine-price').value = '';
+                document.getElementById('medicine-quantity').value = '';
+                document.getElementById('medicine-expiry').value = '';
+                
+                // گەڕاندنەوەی دوگمەی زیادکردن
+                const addBtn = document.getElementById('add-medicine-btn');
+                addBtn.innerHTML = '<i class="fas fa-plus"></i> زیادکردن';
+                addBtn.onclick = addNewMedicine;
+                
+                // لابردنی دوگمەی پاشگەزبوونەوە
+                const cancelBtn = document.querySelector('#add-medicine-row button.btn-outline');
+                if (cancelBtn) cancelBtn.remove();
+                
+                updateInventoryTable();
+                updateMedicineDropdown();
+                updateDashboardStats();
+                
+                showAlert('زانیارییەکانی دەرمان نوێکرایەوە!', 'success');
+            }
+        }
+        
+        // سڕینەوەی دەرمان
+        function deleteMedicine(id) {
+            if (confirm('دڵنیایت لە سڕینەوەی ئەم دەرمانە؟')) {
+                medicines = medicines.filter(m => m.id !== id);
+                saveData();
+                updateInventoryTable();
+                updateMedicineDropdown();
+                updateDashboardStats();
+                showAlert('دەرمان بە سەرکەوتوویی سڕایەوە!', 'success');
+            }
+        }
+        
+        // ڕێکخستنی سیستەمی فرۆشتن
+        function setupSalesSystem() {
+            document.getElementById('add-to-cart').addEventListener('click', addToCart);
+            document.getElementById('complete-sale').addEventListener('click', completeSale);
+            document.getElementById('print-receipt').addEventListener('click', printReceipt);
+        }
+        
+        // نوێکردنەوەی لیستی دەرمانەکان بۆ فرۆشتن
+        function updateMedicineDropdown() {
+            const select = document.getElementById('sale-medicine');
+            select.innerHTML = '<option value="">دەرمان هەڵبژێرە...</option>';
+            
+            medicines.filter(m => m.quantity > 0).forEach(medicine => {
+                const option = document.createElement('option');
+                option.value = medicine.id;
+                option.textContent = `${medicine.name} (${medicine.price.toLocaleString()} دینار) - ${medicine.quantity} دانە`;
+                select.appendChild(option);
+            });
+        }
+        
+        // زیادکردنی دەرمان بۆ سەبەتە
+        function addToCart() {
+            const medicineId = parseInt(document.getElementById('sale-medicine').value);
+            const quantity = parseInt(document.getElementById('sale-quantity').value);
+            
+            if (!medicineId) {
+                showAlert('تکایە دەرمانێک هەڵبژێرە!', 'error');
+                return;
+            }
+            
+            if (isNaN(quantity)) {
+                showAlert('تکایە ژمارەیەکی دروست بنووسە!', 'error');
+                return;
+            }
+            
+            const medicine = medicines.find(m => m.id === medicineId);
+            if (!medicine) return;
+            
+            if (quantity > medicine.quantity) {
+                showAlert(`تەنها ${medicine.quantity} دانە لەم دەرمانە ماوەتەوە!`, 'error');
+                return;
+            }
+            
+            // پشکنین بۆ ئەوەی ئەگەر پێشتر لە سەبەتە بوو
+            const existingItem = cart.find(item => item.medicine.id === medicineId);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ medicine, quantity });
+            }
+            
+            updateCartTable();
+            document.getElementById('sale-quantity').value = 1;
+        }
+        
+        // نوێکردنەوەی سەبەتە
+        function updateCartTable() {
+            const tbody = document.getElementById('cart-items');
+            tbody.innerHTML = '';
+            
+            let totalAmount = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.medicine.price * item.quantity;
+                totalAmount += itemTotal;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.medicine.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.medicine.price.toLocaleString()} دینار</td>
+                    <td>${itemTotal.toLocaleString()} دینار</td>
+                    <td>
+                        <button class="remove-item btn-sm" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            document.getElementById('total-amount').textContent = totalAmount.toLocaleString();
+            
+            // زیادکردنی ڕەفتار بۆ دوگمەی سڕینەوە
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    cart.splice(parseInt(btn.dataset.index), 1);
+                    updateCartTable();
+                });
+            });
+        }
+        
+        // تەواوکردنی فرۆشتن
+        function completeSale() {
+            if (cart.length === 0) {
+                showAlert('سەبەتە بەتاڵە!', 'error');
+                return;
+            }
+            
+            if (confirm('دڵنیایت لە تەواوکردنی فرۆشتن؟')) {
+                // نوێکردنەوەی ناوەڕۆک
+                cart.forEach(item => {
+                    const medicine = medicines.find(m => m.id === item.medicine.id);
+                    if (medicine) medicine.quantity -= item.quantity;
+                });
+                
+                // تۆمارکردنی فرۆشتن
+                const sale = {
+                    id: sales.length > 0 ? Math.max(...sales.map(s => s.id)) + 1 : 1,
+                    date: new Date().toISOString().split('T')[0],
+                    time: new Date().toLocaleTimeString(),
+                    items: [...cart],
+                    total: calculateCartTotal(),
+                    receiptNumber: generateReceiptNumber()
+                };
+                
+                sales.push(sale);
+                cart = [];
+                
+                saveData();
+                updateCartTable();
+                updateInventoryTable();
+                updateMedicineDropdown();
+                updateDashboardStats();
+                
+                // نیشاندانی وەصل
+                generateReceipt(sale);
+                document.getElementById('receipt-section').style.display = 'block';
+                showAlert(`فرۆشتن تەواوبوو! کۆی گشتی: ${sale.total.toLocaleString()} دینار`, 'success');
+            }
+        }
+        
+        // دروستکردنی ژمارەی وەصل
+        function generateReceiptNumber() {
+            const now = new Date();
+            const datePart = now.getFullYear().toString().slice(-2) + 
+                           (now.getMonth() + 1).toString().padStart(2, '0') + 
+                           now.getDate().toString().padStart(2, '0');
+            const randomPart = Math.floor(1000 + Math.random() * 9000);
+            return `R-${datePart}-${randomPart}`;
+        }
+        
+        // ژماردنەوەی کۆی گشتی سەبەتە
+        function calculateCartTotal() {
+            return cart.reduce((total, item) => total + (item.medicine.price * item.quantity), 0);
+        }
+        
+        // دروستکردنی وەصل
+        function generateReceipt(sale) {
+            const receiptDiv = document.getElementById('receipt');
+            receiptDiv.innerHTML = '';
+            
+            const receipt = document.createElement('div');
+            receipt.className = 'receipt';
+            receipt.innerHTML = `
+                <div class="receipt-header">
+                    <h3>دەرمانخانەی نموونەیی</h3>
+                    <p>ژمارەی وەصل: ${sale.receiptNumber}</p>
+                    <p>بەروار: ${sale.date} - ${sale.time}</p>
+                </div>
+                <div class="receipt-items">
+                    ${sale.items.map(item => `
+                        <div class="receipt-item">
+                            <span>${item.medicine.name} (${item.quantity} x ${item.medicine.price.toLocaleString()})</span>
+                            <span>${(item.quantity * item.medicine.price).toLocaleString()} دینار</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="receipt-total">
+                    کۆی گشتی: ${sale.total.toLocaleString()} دینار
+                </div>
+                <p style="text-align: center; margin-top: 15px; font-style: italic;">سوپاس بۆ داواکردن!</p>
+            `;
+            
+            receiptDiv.appendChild(receipt);
+        }
+        
+        // پرینتکردنی وەصل
+        function printReceipt() {
+            const receipt = document.getElementById('receipt').innerHTML;
+            const originalContents = document.body.innerHTML;
+            
+            document.body.innerHTML = `
+                <div style="width: 80mm; margin: 0 auto; padding: 10px; font-family: Arial, sans-serif;">
+                    ${receipt}
+                </div>
+            `;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+        
+        // ڕێکخستنی سیستەمی بارکۆد
+        function setupBarcodeScanner() {
+            const barcodeInput = document.getElementById('barcode-input');
+            
+            // چاکسازی: ڕەنگی ڕەش بۆ سکانەر
+            barcodeInput.style.backgroundColor = '#000';
+            barcodeInput.style.color = '#fff';
+            barcodeInput.style.padding = '10px';
+            barcodeInput.style.borderRadius = '4px';
+            barcodeInput.style.width = '100%';
+            barcodeInput.style.marginTop = '10px';
+            
+            barcodeInput.addEventListener('input', function() {
+                if (this.value.length >= 8) {
+                    const barcode = this.value;
+                    this.value = '';
+                    
+                    const medicine = medicines.find(m => m.barcode === barcode);
+                    if (medicine) {
+                        // چاکسازی: یەکسەر زیادکردنی بۆ سەبەتە
+                        document.getElementById('sale-medicine').value = medicine.id;
+                        const quantityInput = document.getElementById('sale-quantity');
+                        quantityInput.value = 1;
+                        quantityInput.focus();
+                        
+                        // زیادکردنی بۆ سەبەتە
+                        const existingItem = cart.find(item => item.medicine.id === medicine.id);
+                        if (existingItem) {
+                            existingItem.quantity += parseInt(quantityInput.value);
+                        } else {
+                            cart.push({ 
+                                medicine, 
+                                quantity: parseInt(quantityInput.value) 
+                            });
+                        }
+                        
+                        updateCartTable();
+                        showAlert(`دەرمانی ${medicine.name} زیادکرا بۆ سەبەتە`, 'success');
+                    } else {
+                        showAlert('دەرمانێک بەم بارکۆدە نەدۆزرایەوە', 'error');
+                    }
+                }
+            });
+        }
+        
+        // پشکنینی مەوادەی بەسەرچوو
+        function checkExpiredMedicines() {
+            const today = new Date();
+            const expired = medicines.filter(medicine => {
+                const expiryDate = new Date(medicine.expiry);
+                return expiryDate < today;
+            });
+            
+            if (expired.length > 0) {
+                const expiredSection = document.getElementById('expired-medicines');
+                expiredSection.innerHTML = `
+                    <h3><i class="fas fa-exclamation-triangle"></i> ئاگاداری: ${expired.length} دەرمان بەسەرچوون</h3>
+                    <p>تکایە دەرمانە بەسەرچووەکان بسڕەوە یان جێگرەوەییان دابنێ</p>
+                `;
+                expiredSection.style.display = 'block';
+            }
+        }
+        
+        // نوێکردنەوەی ئامارەکانی داشبۆرد
+        function updateDashboardStats() {
+            document.getElementById('total-medicines').textContent = medicines.length;
+            
+            const lowStock = medicines.filter(m => m.quantity < 10).length;
+            document.getElementById('low-stock').textContent = lowStock;
+            
+            const today = new Date().toISOString().split('T')[0];
+            const todaySales = sales.filter(s => s.date === today);
+            const todayTotal = todaySales.reduce((sum, sale) => sum + sale.total, 0);
+            document.getElementById('today-sales').textContent = `${todaySales.length} (${todayTotal.toLocaleString()} دینار)`;
+        }
+        
+        // دروستکردنی ڕاپۆرت
+        function generateReport() {
+            const reportType = document.getElementById('report-type').value;
+            const reportDate = document.getElementById('report-date').value;
+            const resultsDiv = document.getElementById('report-results');
+            
+            let reportHTML = '';
+            
+            if (reportType === 'inventory') {
+                reportHTML = generateInventoryReport();
+            } else if (reportType === 'sales') {
+                reportHTML = generateSalesReport(reportDate);
+            } else if (reportType === 'expiry') {
+                reportHTML = generateExpiryReport();
+            }
+            
+            resultsDiv.innerHTML = reportHTML;
+            
+            // زیادکردنی دوگمەی پرینت
+            const printBtn = document.createElement('button');
+            printBtn.className = 'btn';
+            printBtn.innerHTML = '<i class="fas fa-print"></i> پرینتکردنی ڕاپۆرت';
+            printBtn.addEventListener('click', printReport);
+            resultsDiv.appendChild(printBtn);
+        }
+        
+        // دروستکردنی ڕاپۆرتی کۆگا
+        function generateInventoryReport() {
+            let html = `
+                <h3><i class="fas fa-boxes"></i> ڕاپۆرتی کۆگا</h3>
+                <p>کۆی گشتی دەرمانەکان: ${medicines.length}</p>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>کۆد</th>
+                                <th>ناو</th>
+                                <th>نرخ</th>
+                                <th>ژمارە</th>
+                                <th>بەتاڵی</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            medicines.forEach(medicine => {
+                const isExpired = new Date(medicine.expiry) < new Date();
+                html += `
+                    <tr class="${isExpired ? 'expired-row' : ''}">
+                        <td>${medicine.code}</td>
+                        <td>${medicine.name}</td>
+                        <td>${medicine.price.toLocaleString()}</td>
+                        <td>${medicine.quantity}</td>
+                        <td>${medicine.expiry} ${isExpired ? '(بەسەرچوو)' : ''}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        // دروستکردنی ڕاپۆرتی فرۆشتن
+        function generateSalesReport(dateFilter) {
+            let filteredSales = [...sales];
+            if (dateFilter) {
+                filteredSales = sales.filter(s => s.date === dateFilter);
+            }
+            
+            let html = `
+                <h3><i class="fas fa-shopping-cart"></i> ڕاپۆرتی فرۆشتن</h3>
+                <p>کۆی فرۆشتنەکان: ${filteredSales.length}</p>
+            `;
+            
+            if (filteredSales.length > 0) {
+                const totalRevenue = filteredSales.reduce((sum, sale) => sum + sale.total, 0);
+                html += `
+                    <p>کۆی داھات: ${totalRevenue.toLocaleString()} دینار</p>
+                    <div class="table-responsive">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>ژمارەی وەصل</th>
+                                    <th>بەروار</th>
+                                    <th>ژمارەی دەرمان</th>
+                                    <th>کۆی گشتی</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                filteredSales.forEach(sale => {
+                    const itemCount = sale.items.reduce((count, item) => count + item.quantity, 0);
+                    html += `
+                        <tr>
+                            <td>${sale.receiptNumber}</td>
+                            <td>${sale.date}</td>
+                            <td>${itemCount}</td>
+                            <td>${sale.total.toLocaleString()}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } else {
+                html += '<p>هیچ فرۆشتنێک نییە</p>';
+            }
+            
+            return html;
+        }
+        
+        // دروستکردنی ڕاپۆرتی مەوادەی بەسەرچوو
+        function generateExpiryReport() {
+            const today = new Date();
+            const expired = medicines.filter(medicine => new Date(medicine.expiry) < today);
+            
+            let html = `
+                <h3><i class="fas fa-calendar-times"></i> دەرمانەکانی بەسەرچوو</h3>
+                <p>کۆی دەرمانە بەسەرچووەکان: ${expired.length}</p>
+            `;
+            
+            if (expired.length > 0) {
+                html += `
+                    <div class="table-responsive">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>کۆد</th>
+                                    <th>ناو</th>
+                                    <th>ژمارە</th>
+                                    <th>بەتاڵی</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                expired.forEach(medicine => {
+                    html += `
+                        <tr>
+                            <td>${medicine.code}</td>
+                            <td>${medicine.name}</td>
+                            <td>${medicine.quantity}</td>
+                            <td>${medicine.expiry}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } else {
+                html += '<p>هیچ دەرمانێکی بەسەرچوو نییە</p>';
+            }
+            
+            return html;
+        }
+        
+        // پرینتکردنی ڕاپۆرت
+        function printReport() {
+            const reportContent = document.querySelector('.report-results').innerHTML;
+            const originalContents = document.body.innerHTML;
+            
+            document.body.innerHTML = `
+                <div style="width: 100%; max-width: 800px; margin: 0 auto; padding: 20px;">
+                    <h2 style="text-align: center; margin-bottom: 20px;">ڕاپۆرتی دەرمانخانە</h2>
+                    ${reportContent}
+                    <p style="text-align: left; margin-top: 30px;">بەرواری پرینت: ${new Date().toLocaleDateString()}</p>
+                </div>
+            `;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+        
+        // نیشاندانی ئاگاداری
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'times-circle' : 'exclamation-circle'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.classList.add('fade-out');
+                setTimeout(() => alertDiv.remove(), 500);
+            }, 3000);
+        }
     </script>
-
 </body>
 </html>
